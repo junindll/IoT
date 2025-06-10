@@ -25,11 +25,11 @@ Esse projeto usa [`next/font`](https://nextjs.org/docs/app/building-your-applica
 Para ler mais sobre Next.js, dê uma olhada nesses conteúdos:
 
 - [Next.js Documentation](https://nextjs.org/docs) - documentação do Next.js — saiba mais sobre os recursos e a API do Next.js.
-- [Learn Next.js](https://nextjs.org/learn) - um tutorial passo a passo..
+- [Learn Next.js](https://nextjs.org/learn) - um tutorial passo a passo.
 - [the Next.js GitHub repository](https://github.com/vercel/next.js) - contribua com feedback e melhorias.
 
 ## Deploy no Vercel
 
-A maneira mais fácil de implantar seu app Next.js é usar [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) criada pelos desenvolvedores do Next.js
+A maneira mais fácil de implantar seu app Next.js é usar [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) criada pelos desenvolvedores do Next.js.
 
 Confira a [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) para mais detalhes.
