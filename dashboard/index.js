@@ -1,13 +1,12 @@
 import { useEffect, useState } from 'react';
-import Head from 'next/head'; // Para adicionar título e estilos
+import Head from 'next/head';
 
 export default function Dashboard() {
   const [sensorData, setSensorData] = useState({});
   const [connectionStatus, setConnectionStatus] = useState("Conectando...");
 
   useEffect(() => {
-    // CERTIFIQUE-SE DE USAR SUA URL REAL DO RENDER AQUI!
-    const WSS_URL = "https://iot-api-hwib.onrender.com/ws"; // <-- MUDE AQUI!
+    const WSS_URL = "https://iot-api-hwib.onrender.com"; 
     const socket = new WebSocket(WSS_URL);
 
     socket.onopen = () => {
@@ -20,7 +19,6 @@ export default function Dashboard() {
         const newData = JSON.parse(event.data);
         console.log("New data:", newData);
 
-        // Adiciona um timestamp de quando o dado foi recebido no frontend
         newData.receivedAt = new Date().toLocaleTimeString();
 
         setSensorData(prevData => ({
@@ -41,15 +39,12 @@ export default function Dashboard() {
     socket.onclose = () => {
       console.log("WebSocket disconnected!");
       setConnectionStatus("Desconectado. Tentando reconectar em 5s...");
-      // Opcional: Tentar reconectar após um tempo
-      // setTimeout(() => { /* Lógica de reconexão */ }, 5000);
     };
 
-    // Função de limpeza para fechar o socket ao sair da página
     return () => {
       socket.close();
     };
-  }, []); // Array vazio garante que rode apenas uma vez
+  }, []); 
 
   return (
     <div className="container">
