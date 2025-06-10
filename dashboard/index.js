@@ -6,7 +6,7 @@ export default function Dashboard() {
   const [connectionStatus, setConnectionStatus] = useState("Conectando...");
 
   useEffect(() => {
-    const WSS_URL = "https://iot-api-hwib.onrender.com"; 
+    const WSS_URL = "wss://iot-api-hwib.onrender.com/ws"; 
     const socket = new WebSocket(WSS_URL);
 
     socket.onopen = () => {
