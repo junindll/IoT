@@ -3,3 +3,4 @@ pymongo[srv]
 uvicorn
 python-dotenv
 fastapi-cors
+dnspython
