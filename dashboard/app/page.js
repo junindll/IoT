@@ -2,15 +2,14 @@
 'use client';
 import { useEffect, useState } from 'react';
 import Head from 'next/head';
-import SensorChart from '../components/SensorChart'; // <-- IMPORTA O NOVO COMPONENTE
+import SensorChart from '../components/SensorChart';
 
 export default function Dashboard() {
     const [sensorData, setSensorData] = useState({});
     const [connectionStatus, setConnectionStatus] = useState("Conectando...");
-    const [selectedSensor, setSelectedSensor] = useState(null); // <-- NOVO ESTADO
+    const [selectedSensor, setSelectedSensor] = useState(null);
 
     useEffect(() => {
-        // ATENÇÃO: Use a sua URL real do Render aqui!
         const WSS_URL = "wss://iot-api-hwib.onrender.com/ws"; 
         const socket = new WebSocket(WSS_URL);
 
