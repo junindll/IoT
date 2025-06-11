@@ -73,7 +73,7 @@ export default function Dashboard() {
         </div>
       </main>
 
-      {}
+      {/* Você pode mover estes estilos para o arquivo app/globals.css se preferir */}
       <style jsx>{`
         .container {
           min-height: 100vh;
