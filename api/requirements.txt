@@ -4,3 +4,4 @@ uvicorn
 python-dotenv
 fastapi-cors
 dnspython
+websockets
