@@ -1,3 +1,5 @@
+'use client'; // MUITO IMPORTANTE: Define este como um Componente de Cliente
+
 import { useEffect, useState } from 'react';
 import Head from 'next/head';
 
@@ -15,20 +17,15 @@ export default function Dashboard() {
     };
 
     socket.onmessage = (event) => {
-      try {
-        const newData = JSON.parse(event.data);
-        console.log("New data:", newData);
+      const newData = JSON.parse(event.data);
+      console.log("New data:", newData);
 
-        newData.receivedAt = new Date().toLocaleTimeString();
+      newData.receivedAt = new Date().toLocaleTimeString();
 
-        setSensorData(prevData => ({
-          ...prevData,
-          [newData.sensor_id]: newData
-        }));
-
-      } catch (error) {
-        console.warn("Received non-JSON message (maybe ping or other):", event.data);
-      }
+      setSensorData(prevData => ({
+        ...prevData,
+        [newData.sensor_id]: newData
+      }));
     };
 
     socket.onerror = (error) => {
@@ -38,13 +35,13 @@ export default function Dashboard() {
 
     socket.onclose = () => {
       console.log("WebSocket disconnected!");
-      setConnectionStatus("Desconectado. Tentando reconectar em 5s...");
+      setConnectionStatus("Desconectado");
     };
 
     return () => {
       socket.close();
     };
-  }, []); 
+  }, []);
 
   return (
     <div className="container">
@@ -76,7 +73,7 @@ export default function Dashboard() {
         </div>
       </main>
 
-      {/* Estilos CSS embutidos para simplicidade */}
+      {}
       <style jsx>{`
         .container {
           min-height: 100vh;
@@ -95,65 +92,19 @@ export default function Dashboard() {
           flex-direction: column;
           align-items: center;
         }
-        h1 {
-            color: #333;
-        }
-        .status {
-            font-size: 1.1em;
-            margin-bottom: 2rem;
-            padding: 5px 10px;
-            border-radius: 5px;
-        }
+        h1 { color: #333; }
+        .status { font-size: 1.1em; margin-bottom: 2rem; padding: 5px 10px; border-radius: 5px; }
         .status.conectado { background-color: #d4edda; color: #155724; }
         .status.erro! { background-color: #f8d7da; color: #721c24; }
         .status.conectando...,
         .status.desconectado { background-color: #fff3cd; color: #856404; }
-
-        .grid {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-wrap: wrap;
-          max-width: 800px;
-          margin-top: 1rem;
-        }
-        .card {
-          margin: 1rem;
-          padding: 1.5rem;
-          text-align: left;
-          color: inherit;
-          text-decoration: none;
-          border: 1px solid #eaeaea;
-          border-radius: 10px;
-          transition: color 0.15s ease, border-color 0.15s ease;
-          width: 220px;
-          background-color: white;
-          box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        .card:hover {
-          border-color: #0070f3;
-        }
-        .card h2 {
-          margin: 0 0 1rem 0;
-          font-size: 1.5rem;
-          color: #0070f3;
-        }
-        .card p {
-          margin: 0;
-          font-size: 1.1rem;
-          line-height: 1.5;
-          color: #555;
-        }
-        .card p span {
-            font-weight: bold;
-            color: #333;
-        }
-        .card small {
-            display: block;
-            margin-top: 1rem;
-            font-size: 0.8em;
-            color: #888;
-        }
+        .grid { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; max-width: 800px; margin-top: 1rem; }
+        .card { margin: 1rem; padding: 1.5rem; text-align: left; border: 1px solid #eaeaea; border-radius: 10px; transition: color 0.15s ease, border-color 0.15s ease; width: 220px; background-color: white; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .card:hover { border-color: #0070f3; }
+        .card h2 { margin: 0 0 1rem 0; font-size: 1.5rem; color: #0070f3; }
+        .card p { margin: 0; font-size: 1.1rem; line-height: 1.5; color: #555; }
+        .card p span { font-weight: bold; color: #333; }
+        .card small { display: block; margin-top: 1rem; font-size: 0.8em; color: #888; }
       `}</style>
     </div>
   );

@@ -2,7 +2,7 @@ import asyncio
 import random
 import aiohttp
 
-URL = "https://iot-api-hwib.onrender.com"
+URL = "https://iot-api-hwib.onrender.com/data"
 
 async def send_data(sensor_id):
     while True:
