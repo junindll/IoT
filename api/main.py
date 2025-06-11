@@ -40,24 +40,19 @@ async def read_root():
 @app.post("/data")
 async def post_data(payload: dict):
     collection.insert_one(payload)
-    await manager.broadcast(json.dumps(payload))
+    await manager.broadcast(json_util.dumps(payload))
     return {"status": "ok"}
 
-# --- MODIFICAÇÃO PRINCIPAL AQUI ---
 @app.websocket("/ws")
 async def websocket_endpoint(ws: WebSocket):
     await manager.connect(ws)
-    # Adicionamos um print para ver nos logs do Render se a conexão chega aqui
     print(f"!!! CONEXÃO WEBSOCKET ACEITA de {ws.client.host} !!!")
     try:
-        # Em vez de enviar pings, vamos apenas esperar por mensagens (mantém a conexão aberta)
         while True:
             await ws.receive_text()
     except WebSocketDisconnect:
-        # Quando o cliente desconectar, registramos e removemos da lista
         print(f"--- CONEXÃO WEBSOCKET FECHADA de {ws.client.host} ---")
         manager.disconnect(ws)
-# --- FIM DA MODIFICAÇÃO ---
 
 @app.get("/history/{sensor_id}")
 async def get_history(sensor_id: str, limit: int = 20):
